@@ -13,9 +13,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+var exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
 // Routes
 // =============================================================
-require("./app/routes/api-routes.js")(app);
+var routes = require("./controllers/burgers_controller.js")
+app.use(routes);
 
 // Starts the server to begin listening
 // =============================================================
