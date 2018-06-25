@@ -9,7 +9,7 @@ var burger = require("../models/burger.js");
 router.get("/", function(req, res) {
   burger.selectAll(function(data) {
     var hbsObject = {
-      burger_name: data
+      burgers: data
     };
     console.log(hbsObject);
     res.render("index", hbsObject);
@@ -19,7 +19,7 @@ router.get("/", function(req, res) {
 router.post("/api/burgers", function(req, res) {
   burger.insertOne(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function(result) {
     // Send back the ID of the new quote
-    res.json({ id: result.id });
+    res.json({ id: result.insertId });
   });
 });
 
